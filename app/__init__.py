@@ -37,7 +37,7 @@ def handle_single_user(_id):
 
     if request.method == 'PUT':
         data = request.get_json()
-        user = users_collection.find_one({"_id": ObjectId(_id)})  # Use find_one() to get a single document
+        user = users_collection.find_one_and_replace({"_id": ObjectId(_id)}, data)  # Use find_one() to get a single document
         print('data ====> ', data)
         print('user ======> ', user)
 
