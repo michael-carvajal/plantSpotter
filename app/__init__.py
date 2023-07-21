@@ -30,8 +30,20 @@ def handle_users():
 @app.route('/api/users/<string:_id>', methods=['PUT', 'DELETE'])
 def handle_single_user(_id):
     print('id of the single user  ==== = = = >', _id)
-    user = users_collection.find_one_and_delete({"_id": ObjectId(_id)})  # Use find_one() to get a single document
+
+
+    if request.method == 'DELETE':
+        user = users_collection.find_one_and_delete({"_id": ObjectId(_id)})  # Use find_one() to get a single document
+
+    if request.method == 'PUT':
+        data = request.get_json()
+        user = users_collection.find_one({"_id": ObjectId(_id)})  # Use find_one() to get a single document
+        print('data ====> ', data)
+        print('user ======> ', user)
+
     print('user detail from query ====> ', user)
+
+
     if user:
         user['_id'] = str(user['_id'])  # Convert the '_id' field to a string
         return jsonify(user)
