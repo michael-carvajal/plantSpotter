@@ -17,3 +17,4 @@ def make_serializable(data):
 
 
 users_collection = db.users
+plants_collection = db.users

@@ -1,14 +1,11 @@
 from flask import jsonify, request, Blueprint
 from bson import ObjectId
 from ..mongoDB import  users_collection
+from .utils import make_serializable
 
 user_routes = Blueprint('users', __name__)
 
-def make_serializable(data):
-    # Convert ObjectId to string representation in the '_id' field
-    for item in data:
-        item['_id'] = str(item['_id'])
-    return data
+
 
 @user_routes.route('', methods=['GET', 'POST'])
 def handle_users():
